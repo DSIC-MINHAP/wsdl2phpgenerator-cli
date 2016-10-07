@@ -331,7 +331,6 @@ class GenerateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        var_dump($input->getOption('help'));
         if (!$input->getOption('help')) {
             // Input and output options are in fact required so bail if they are not set.
             if (!$input->getOption('input') || !$input->getOption('output')) {
