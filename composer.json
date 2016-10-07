@@ -16,11 +16,6 @@
             "url": "https://github.com/DSIC-MINHAP/wsdl2phpgenerator"
         }
     ],
-    "config": {
-        "github-oauth": {
-            "github.com": "854cfda846773638e5be58eb529f4079db8ae559"
-        }
-    },
     "require": {
         "php": ">=5.3.0",
         "ext-soap": "*",
