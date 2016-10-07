@@ -6,6 +6,7 @@ namespace Wsdl2PhpGenerator\Console;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Wsdl2PhpGenerator\Generator;
 
 /**
  * The base Wsdl2PhpGenerator console application.
@@ -52,6 +53,7 @@ class Application extends SymfonyApplication
     protected function getCommandName(InputInterface $input)
     {
         $command = new GenerateCommand();
+        $command->setGenerator(new Generator());
         return $command->getName();
     }
 

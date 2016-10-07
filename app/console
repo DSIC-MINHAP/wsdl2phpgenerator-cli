@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Application\Wsdl2PhpGeneratorApplication;
+use Dsic\Wsdl2PhpGeneratorBundle\Command\GenerateCommand;
+use Wsdl2PhpGenerator\Console\Application;
+
+define('APP_ROOT', __DIR__);
+
+$application = new Application();
+$application->run();

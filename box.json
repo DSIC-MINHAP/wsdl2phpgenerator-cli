@@ -9,7 +9,6 @@
         "vendor/composer",
         "vendor/symfony",
         "vendor/psr",
-        "lib",
         "src"
     ],
     "files": "Include files from vendor/composer/autoload_files.php as they are required even though they are not used.",
@@ -21,6 +20,6 @@
     ],
     "git-version": "git_tag",
     "output": "wsdl2phpgenerator-@git-version@.phar",
-    "main": "wsdl2php.php",
-    "stub": true
+    "stub": true,
+    "main": "app/console"
 }

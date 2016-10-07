@@ -37,7 +37,7 @@ class GenerateCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wsdl2phpgenerator:generate')
+            ->setName('wsdl2phpgenerator')
             ->setAliases(array('generate'))
             ->setDescription('Generate PHP classes from a WSDL file')
             // Input and output configuration is required and should thus be arguments but to retain the signature of
@@ -100,12 +100,20 @@ class GenerateCommand extends Command
                 'compression'
             )
             ->addConfigOption(
-                'namespace',
+                'namespaceName',
                 'n',
                 InputOption::VALUE_REQUIRED,
                 'Use namespace with the name',
                 null,
                 'namespaceName'
+            )
+            ->addConfigOption(
+                'use',
+                'u',
+                InputOption::VALUE_REQUIRED,
+                'Add uses for the classNames',
+                null,
+                'use'
             )
             ->addConfigOption(
                 'noIncludes',
@@ -323,45 +331,74 @@ class GenerateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // Input and output options are in fact required so bail if they are not set.
-        if (!$input->getOption('input') || !$input->getOption('output')) {
-            throw new \RuntimeException('Not enough arguments. Please specify input and output options.');
-        }
-
-        // Initialize configuration with null values. They will be updated during mapping.
-        $config = new Config(array(
-            'inputFile' => null,
-            'outputDir' => null
-        ));
-
-        // Map arguments to configuration
-        foreach ($this->inputConfigMapping as $mapping) {
-            $mapping($input, $config);
-        }
-
-        // Some arguments interact. Prompt the user to determine how to react.
-        if ($config->get('oneFile') && $config->get('classNames')) {
-            // Print different messages based on if more than one class is requested for generation
-            if (sizeof($config->get('classNames')) > 1) {
-                $message = sprintf('You have selected to only generate some of the classes in the wsdl (%s) and to save them in one file. Continue?', $config->get('classNames'));
-            } else {
-                $message = 'You have selected to only generate one class and save it to a single file. If you have selected the service class and outputs this file to a directory where you previosly have generated the classes the file will be overwritten. Continue?';
+        var_dump($input->getOption('help'));
+        if (!$input->getOption('help')) {
+            // Input and output options are in fact required so bail if they are not set.
+            if (!$input->getOption('input') || !$input->getOption('output')) {
+                throw new \RuntimeException('Not enough arguments. Please specify input and output options.');
             }
-            $continue = $this->getHelper('dialog')->askConfirmation($output, '<question>' . $message . '</question>');
-            if (!$continue) {
-                return;
+
+            // Initialize configuration with null values. They will be updated during mapping.
+            $config = new Config(array(
+                'inputFile' => null,
+                'outputDir' => null
+            ));
+
+            // Map arguments to configuration
+            foreach ($this->inputConfigMapping as $mapping) {
+                $mapping($input, $config);
             }
+
+            // Some arguments interact. Prompt the user to determine how to react.
+            if ($config->get('oneFile') && $config->get('classNames')) {
+                // Print different messages based on if more than one class is requested for generation
+                if (sizeof($config->get('classNames')) > 1) {
+                    $message = sprintf('You have selected to only generate some of the classes in the wsdl (%s) and to save them in one file. Continue?', $config->get('classNames'));
+                } else {
+                    $message = 'You have selected to only generate one class and save it to a single file. If you have selected the service class and outputs this file to a directory where you previosly have generated the classes the file will be overwritten. Continue?';
+                }
+                $continue = $this->getHelper('dialog')->askConfirmation($output, '<question>' . $message . '</question>');
+                if (!$continue) {
+                    return;
+                }
+            }
+
+            // Only set the logger if the generator instance supports this.
+            // setLogger() has not been added to GeneratorInterface for backwards compatibility reasons.
+            // FIXME: v3
+            if (method_exists($this->generator, 'setLogger')) {
+                $this->generator->setLogger(new OutputLogger($output));
+            }
+
+            // outputs multiple lines to the console (adding "\n" at the end of each line)
+            $output->writeln([
+                'Starting to create the soap client',
+                '============',
+                '',
+            ]);
+            // Go generate!
+            $this->generator->generate($config);
+
+            // outputs multiple lines to the console (adding "\n" at the end of each line)
+            $output->writeln([
+                '',
+                '============',
+                'Finish!!',
+                '',
+            ]);
+        } else {
+
+
+            // outputs multiple lines to the console (adding "\n" at the end of each line)
+            $output->writeln([
+                '',
+                '============',
+                'Help',
+                '============',
+                '',
+            ]);
         }
 
-        // Only set the logger if the generator instance supports this.
-        // setLogger() has not been added to GeneratorInterface for backwards compatibility reasons.
-        // FIXME: v3
-        if (method_exists($this->generator, 'setLogger')) {
-            $this->generator->setLogger(new OutputLogger($output));
-        }
-
-        // Go generate!
-        $this->generator->generate($config);
     }
 
     /**
