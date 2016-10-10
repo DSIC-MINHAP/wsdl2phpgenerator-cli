@@ -8,6 +8,7 @@
     "directories": [
         "vendor/composer",
         "vendor/symfony",
+        "vendor/phpseclib",
         "vendor/psr",
         "src"
     ],

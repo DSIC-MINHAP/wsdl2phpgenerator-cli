@@ -11,7 +11,7 @@ use Wsdl2PhpGenerator\Generator;
 /**
  * The base Wsdl2PhpGenerator console application.
  *
- * @package Wsdl2PhpGenerator\Console
+ * @package Wsdl2PhpGeneratorCli\Console
  */
 class Application extends SymfonyApplication
 {
@@ -53,7 +53,6 @@ class Application extends SymfonyApplication
     protected function getCommandName(InputInterface $input)
     {
         $command = new GenerateCommand();
-        $command->setGenerator(new Generator());
         return $command->getName();
     }
 
@@ -62,7 +61,9 @@ class Application extends SymfonyApplication
         // Keep the core default commands to have the HelpCommand
         // which is used when using the --help option
         $defaultCommands = parent::getDefaultCommands();
-        $defaultCommands[] = new GenerateCommand();
+        $command = new GenerateCommand();
+        $command->setGenerator(new Generator());
+        $defaultCommands[] = $command;
 
         return $defaultCommands;
     }

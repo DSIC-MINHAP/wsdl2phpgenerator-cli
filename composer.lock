@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c01c7f254cbb4ca4f25da78b1fe7d09f",
-    "content-hash": "916548a0426be245cec240b363fc4924",
+    "hash": "e7180de4d2c94014c2e4cd1bf11ce839",
+    "content-hash": "ecf8de56797a5aa1dc9a6156640416c9",
     "packages": [
         {
             "name": "psr/log",
@@ -287,11 +287,17 @@
         },
         {
             "name": "wsdl2phpgenerator/wsdl2phpgenerator",
-            "version": "3.3.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/DSIC-MINHAP/wsdl2phpgenerator",
-                "reference": "e486869ca8c41a8d731f616ab9094a3ba56179aa"
+                "url": "https://github.com/DSIC-MINHAP/wsdl2phpgenerator.git",
+                "reference": "9268c623ea50668f5b849bf3246c61bee7ed8654"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DSIC-MINHAP/wsdl2phpgenerator/zipball/9268c623ea50668f5b849bf3246c61bee7ed8654",
+                "reference": "9268c623ea50668f5b849bf3246c61bee7ed8654",
+                "shasum": ""
             },
             "require": {
                 "ext-soap": "*",
@@ -301,7 +307,7 @@
             "require-dev": {
                 "kasperg/phing-github": "0.2.*",
                 "phing/phing": "~2.7",
-                "php-vcr/php-vcr": "~1.2",
+                "php-vcr/php-vcr": "1.2 - 1.2.7",
                 "php-vcr/phpunit-testlistener-vcr": "~1.1.2",
                 "phpunit/phpunit": "~4.4",
                 "psr/log": "~1.0",
@@ -317,7 +323,7 @@
                 }
             },
             "autoload-dev": {
-                "psr-4": {
+                "psr-0": {
                     "Wsdl2PhpGenerator\\Tests\\": [
                         "tests/src"
                     ]
@@ -331,7 +337,10 @@
                 "soap",
                 "wsdl"
             ],
-            "time": "2016-01-13 13:00:24"
+            "support": {
+                "source": "https://github.com/DSIC-MINHAP/wsdl2phpgenerator/tree/master"
+            },
+            "time": "2016-10-06 11:07:54"
         }
     ],
     "packages-dev": [

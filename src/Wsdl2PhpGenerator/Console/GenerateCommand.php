@@ -150,9 +150,9 @@ class GenerateCommand extends Command
             ->addConfigOption(
                 'singleFile',
                 's',
-                InputOption::VALUE_NONE,
+                InputOption::VALUE_REQUIRED,
                 'If the output should be a single file',
-                null,
+                false,
                 'oneFile'
             )
             ->addConfigOption(
@@ -162,6 +162,14 @@ class GenerateCommand extends Command
                 'The suffix to use for the generated classes',
                 null,
                 'suffix'
+            )
+            ->addConfigOption(
+                'constructorParamsDefaultToNull',
+                'd',
+                InputOption::VALUE_NONE,
+                'sets the default value of all parameters in all constructors to null. If this is used then properties must be set using accessors',
+                null,
+                'constructorParamsDefaultToNull'
             )
 
             ->addCacheOption(
