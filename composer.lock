@@ -291,12 +291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DSIC-MINHAP/wsdl2phpgenerator.git",
-                "reference": "9268c623ea50668f5b849bf3246c61bee7ed8654"
+                "reference": "480f54113ac88eb80f092ce6c8e020adebfeb811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DSIC-MINHAP/wsdl2phpgenerator/zipball/9268c623ea50668f5b849bf3246c61bee7ed8654",
-                "reference": "9268c623ea50668f5b849bf3246c61bee7ed8654",
+                "url": "https://api.github.com/repos/DSIC-MINHAP/wsdl2phpgenerator/zipball/480f54113ac88eb80f092ce6c8e020adebfeb811",
+                "reference": "480f54113ac88eb80f092ce6c8e020adebfeb811",
                 "shasum": ""
             },
             "require": {
@@ -340,7 +340,7 @@
             "support": {
                 "source": "https://github.com/DSIC-MINHAP/wsdl2phpgenerator/tree/master"
             },
-            "time": "2016-10-06 11:07:54"
+            "time": "2016-10-10 11:37:58"
         }
     ],
     "packages-dev": [

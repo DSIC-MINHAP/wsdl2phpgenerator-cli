@@ -10,6 +10,7 @@
         "vendor/symfony",
         "vendor/phpseclib",
         "vendor/psr",
+        "vendor/wsdl2phpgenerator",
         "src"
     ],
     "files": "Include files from vendor/composer/autoload_files.php as they are required even though they are not used.",
